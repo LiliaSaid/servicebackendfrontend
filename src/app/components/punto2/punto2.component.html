@@ -1,0 +1,60 @@
+<div>
+    <div class="align-content-center">
+        <br/>
+        <form #formsms="ngForm" class="card col-md-5 offset-3" >
+            <div class="card-header text-center"> Envio de Mensajes</div>
+            <div class="card-body">
+            <div class="row form-group">
+                <label class="col-sm-12 col-md-4">Para: </label>
+                <input class="form-control col-sm-12 col-md-8" type="number" name="para" #para="ngModel" required minlength="10"  placeholder="Numero sin 0 ni 15" [(ngModel)]="mensaje.para"/>
+            </div>
+            <div class="row form-group">
+            <label class="col-sm-12 col-md-4" >De: </label>
+            <input class="form-control col-sm-12 col-md-8" type="text" name="de" #de="ngModel" required placeholder="Tu nombre" [(ngModel)]="mensaje.desde"/>
+            </div>
+            <label> </label>
+            <div class="row form-group">
+            <textarea autofocus id="mensaje" wrap="hard" class="form-control" required rows="3" name="texto" #texto="ngModel" maxlength="120" [(ngModel)]="mensaje.texto"></textarea>
+            <div>
+            <p>({{cantidadrestante()}} caracteres restantes)</p>
+            </div>
+            </div>
+            <div class="row form-group">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mod" (click)="enviarMensaje()" >Enviar</button>
+            <button type="reset" class="btn btn-primary" >Limpiar</button>
+            
+
+            </div>
+        </div>
+        </form>
+    </div>
+
+    <table class="table table-striped" [mfData]="mensajes" #mf="mfDataTable" [mfRowsOnPage]="5">
+        <thead>
+            <tr>
+                <th style="width: 20%">
+                <mfDefaultSorter by="name"> Fecha </mfDefaultSorter>
+                </th>
+                <th style="width: 50%">
+                <mfDefaultSorter by="nombreOrganizacion"> Desde </mfDefaultSorter>
+                </th>
+                <th style="width: 10%">
+                <mfDefaultSorter by="constancia"> Para </mfDefaultSorter>
+                </th>
+                <th style="width: 10%">
+                    <mfDefaultSorter by="constancia"> Mensaje </mfDefaultSorter>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of mensajes">
+                <td>{{item.fecha}}</td>
+                <td>{{item.desde}}</td>
+                <td>{{item.para}}</td>
+                <td>{{item.texto}}</td>
+                
+            </tr>
+        </tbody>
+    </table>
+
+</div>
